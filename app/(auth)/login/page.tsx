@@ -21,7 +21,12 @@ export default function LoginPage() {
         <form className="grid gap-8"
         action={async(formdata)=>{
           "use server"
-          await signIn("resend", formdata)
+           const data = Object.fromEntries(formdata) as { email: string };
+          await signIn("resend", {
+  email: data.email,
+  redirect: false, // won't crash if email fails
+});
+
         }}
         >
           <div>
