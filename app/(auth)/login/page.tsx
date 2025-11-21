@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import SubmitButton from "@/components/ui/SubmitButton";
 
+import { signIn } from "@/lib/auth";
 export default function LoginPage() {
   return (
     <Card className="max-w-sm min-w-xs  lg:min-w-sm p-4" >
@@ -17,7 +18,12 @@ export default function LoginPage() {
         Enter your email below to login in your account
       </CardDescription>
       <CardContent>
-        <form className="grid gap-8">
+        <form className="grid gap-8"
+        action={async(formdata)=>{
+          "use server"
+          await signIn("resend", formdata)
+        }}
+        >
           <div>
             <Label>Email</Label>
             <Input
